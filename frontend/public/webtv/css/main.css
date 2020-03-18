@@ -1,0 +1,27 @@
+.center {
+	margin: 0 auto;
+}
+.blue {
+	color:#76cce8;
+}
+
+h2 {
+	margin-top: 0px;
+}
+
+/*Phones */
+@media(max-width:767px){ 
+
+	.phone-center {
+		text-align:center;
+	}
+
+	
+}
+
+/*large & medium screens*/
+@media (min-width:992px) {
+	h2 {
+		margin-top: 20px;
+	}
+}

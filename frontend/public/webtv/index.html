@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>LP WebTV</title>
+    
+    <link rel="icon" type="image/png" href="utln-signet.png" />
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/fonts.css">
+
+  </head>
+  <body class="regular">
+
+
+<div style="background-color: #f7f7f7; padding-top:20px; padding-bottom: 30px;">
+<div class="container">
+ 
+ <div class="row">
+	 <div class="col-sm-7 phone-center">
+		<h2>La WebTV de l'université de Toulon</h2>
+	 </div>
+	 <div class="col-sm-5 ">
+			<img src="img/logo_univ.png" class="img-responsive center">
+	</div>
+ </div>
+ 
+</div>   
+</div>
+
+   <div style="padding: 40px 0px 20px 0px;">
+    <div class="container" >
+      <div class="row">
+        <div class="col-sm-6" style="padding-bottom: 20px;">
+		<h3 style="margin:0px; padding-bottom: 15px;">Fonctionnalités</h3>
+		<ul>
+			<li><a onClick="loadVideo('http://localhost:1935/live/webtv/manifest.mpd'); return false;" href="">Direct</a></li>
+			<li><a onClick="loadVideo('http://localhost:8080/BentoDash/test_p/stream.mpd'); return false;" href="">WebTV</a></li>
+			<li>Replay</li>
+		</ul>
+		<br>
+<a onClick="loadVideo('http://localhost:1935/vodcache/_definst_/httploc/tos.mp4/manifest.mpd');
+ return false;" href=""><img src="img/replay.png" class="img-responsive center"></a>
+       </div>
+        <div class="col-sm-6">
+        	<video id="videoPlayer" controls width="640" high="360" />
+        </div>
+
+      </div>
+    </div>
+</div>
+
+<div style="background-color: #f7f7f7; padding-top:30px; margin-top:25px; padding-bottom: 30px;">
+    <div class="container">
+      <div class="row text-center" style="font-size: 1.5em;">
+        <div class="col-sm-4">
+			<img src="img/html5.png" class="img-responsive center" style="padding-top: 20px;">
+     		<h3 class="blue">Player web</h3>
+      		<p class="light">Lecture video OTT</p>
+       </div>
+       <div class="col-sm-4">
+			<img src="img/wowza-streaming-logo.png" class="img-responsive center" style="padding-top: 20px;">
+     		<h3 class="blue">Serveur Wowza</h3>
+      		<p class="light">Streaming Live et VoD</p>
+		</div>
+		<div class="col-sm-4">
+			<img src="img/abr-stream.png" class="img-responsive center" style="padding-top: 20px;">
+     		<h3 class="blue">Adaptive streaming</h3>
+      		<p class="light">Lecture robuste à travers le réseau</p>
+		</div>
+    </div>
+	</div>
+</div>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/dash.all.min.js"></script>
+    <script>
+     function loadVideo(strurl) {
+       var player = document.getElementById("videoPlayer");
+       //dashjs.MediaPlayer().reset();
+       var dashpl = dashjs.MediaPlayer().create();
+       dashpl.initialize(player,strurl,true);
+     }
+    </script>
+  </body>
+</html>
