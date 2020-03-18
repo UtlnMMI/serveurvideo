@@ -5,17 +5,20 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>LP WebTV</title>
-
     <link rel="icon" type="image/png" href="utln-signet.png" />
-
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/fonts.css">
+    <!-- BULMA -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+
+    <!-- DASHJS -->
     <script defer src="http://cdn.dashjs.org/latest/dash.all.min.js"></script>
-    <script src="./js/app.js"></script>
+
+    <!-- SHAKA -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/2.2.6/shaka-player.compiled.js"></script>
+    <script src="https://cdn.teleport.media/stable/teleport.shaka.bundle.js"></script>
+
+    <script defer src="./js/app.js"></script>
 
   </head>
 
@@ -55,8 +58,8 @@
 
     <div class="section">
       <div class="container">
-        <div class="videoDashJs-container">
-          <video data-dashjs-player src="https://dash.akamaized.net/envivio/EnvivioDash3/manifest.mpd" controls class="videoDashJs"></video>
+        <div class="shakaPlayer-container">
+          <!-- <video controls=true class="videoDashJs" id="video"></video> -->
         </div>
       </div>
     </div>

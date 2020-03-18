@@ -1,5 +1,6 @@
 // Event chargement liens dynamiques VODs
 window.addEventListener('load', () => {
+    initApp()
     requete()
 }, false)
 
@@ -13,7 +14,8 @@ const linkCreator = (resp, parent) => {
         link.addEventListener('click', (e) => {
             e.preventDefault()
             console.log(e.target.href)
-            loadManifest()
+            // ! Paramètre à changer par 'e.target.href' quand cms.data aura manifeste valide
+            initPlayer('https://storage.googleapis.com/shaka-demo-assets/angel-one/dash.mpd')
         })
     })
 }
@@ -33,15 +35,57 @@ function requete() {
 }
 
 // Chargement du manifeste
-function loadManifest(mpd = "http://localhost:8080//BentoDash/test_1/stream.mpd") {
+function loadManifest(mpd = "http://localhost:8080/BentoDash/test_1/stream.mpd") {
     let video,
         player,
-        url = mpd;
+        url = mpd
 
-    video = document.querySelector(".videoDashJs");
+    video = document.querySelector(".videoDashJs")
     // video.innerHTML = ''
-    // dashjs.MediaPlayer().reset();
-    // player = dashjs.MediaPlayer().create();
-    // player.initialize(video, url, true);
-    video.src = mpd;
+    video.dashjs.attachSource(url)
+    // video.src = mpd
 }
+
+// Initialisation du Shaka Player
+function initApp() {
+    shaka.polyfill.installAll()
+
+    if (shaka.Player.isBrowserSupported()) {
+        initPlayer()
+    } else {
+        console.error('Browser not supported!')
+    }
+}
+
+// Initialisation des paramètres du Player
+function initPlayer(mpd = "http://localhost:8080/BentoDash/test_1/stream.mpd") {
+    let prt = document.querySelector('.shakaPlayer-container')
+    
+    prt.innerHTML = ""    
+
+    if (~prt.hasChildNodes()) {
+        prt.insertAdjacentHTML('beforeend', '<video id="video" controls=true></video>')
+    }
+    let video = document.getElementById('video')
+    var player = new shaka.Player(video)
+
+    window.player = player
+
+    player.addEventListener('error', onErrorEvent)
+
+    player.load(mpd).then(function () {
+        console.log('The video has now been loaded!')
+    }).catch(onError)
+}
+
+// Code d'erreur
+function onErrorEvent(event) {
+    onError(event.detail)
+}
+
+// Code d'erreur
+function onError(error) {
+    console.error('Error code', error.code, 'object', error)
+}
+
+// document.addEventListener('DOMContentLoaded', )
