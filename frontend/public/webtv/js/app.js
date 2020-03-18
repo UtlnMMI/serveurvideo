@@ -22,7 +22,7 @@ const linkCreator = (resp, parent) => {
 
 // Requete XHR
 function requete() {
-    let linkMpd = document.querySelector('.section.linkVOD .container ul')
+    let linkMpd = document.querySelector('.linkVOD ul')
     xhr = new XMLHttpRequest()
     xhr.addEventListener('readystatechange', function () {
         if (xhr.readyState === XMLHttpRequest.DONE && xhr.readyState === 4) {
