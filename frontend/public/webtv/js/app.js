@@ -1,46 +1,5 @@
-function initApp() {
-  // Install built-in polyfills to patch browser incompatibilities.
-  shaka.polyfill.installAll();
-
-  // Check to see if the browser supports the basic APIs Shaka needs.
-  if (shaka.Player.isBrowserSupported()) {
-    // Everything looks good!
-    initPlayer();
-  } else {
-    // This browser does not have the minimum set of APIs we need.
-    console.error('Browser not supported!');
-  }
-}
-
-function initPlayer(manifestUri) {
-  // Create a Player instance.
-  var video = document.getElementById('video');
-  var player = new shaka.Player(video);
-
-  // Attach player to the window to make it easy to access in the JS console.
-  window.player = player;
-
-  // Listen for error events.
-  player.addEventListener('error', onErrorEvent);
-
-  // Try to load a manifest.
-  // This is an asynchronous process.
-  player.load(manifestUri).then(function() {
-    // This runs if the asynchronous load is successful.
-    console.log('The video has now been loaded!');
-  }).catch(onError);  // onError is executed if the asynchronous load fails.
-}
-
-function onErrorEvent(event) {
-  // Extract the shaka.util.Error object from the event.
-  onError(event.detail);
-}
-
-function onError(error) {
-  // Log the error.
-  console.error('Error code', error.code, 'object', error);
-}
-
+// Numero du port
+const port = ":8080"
 
 // Event chargement liens dynamiques VODs
 window.addEventListener('load', () => {
@@ -74,14 +33,12 @@ function requete() {
             linkCreator(response, linkMpd)
         }
     })
-    xhr.open('GET', 'http://localhost/get_content_list.php')
+    xhr.open('GET', `http://localhost${port}/backend/get_content_list.php`)
     xhr.send(null)
 }
 
 // Chargement du manifeste
-
-function loadManifest(mpd = "http://localhost:8080/BentoDash/test_1/stream.mpd") {
-
+function loadManifest(mpd = `http://localhost${port}/BentoDash/test_1/stream.mpd`) {
     let video,
         player,
         url = mpd
@@ -104,7 +61,7 @@ function initApp() {
 }
 
 // Initialisation des paramètres du Player
-function initPlayer(mpd = "http://localhost:8080/BentoDash/test_1/stream.mpd") {
+function initPlayer(mpd = `http://localhost${port}/BentoDash/test_1/stream.mpd`) {
     let prt = document.querySelector('.shakaPlayer-container')
     
     prt.innerHTML = ""    
@@ -135,4 +92,3 @@ function onError(error) {
 }
 
 // document.addEventListener('DOMContentLoaded', )
-
