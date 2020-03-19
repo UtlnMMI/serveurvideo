@@ -1,5 +1,5 @@
 // Numero du port
-const port = ":8080"
+const host = "localhost:8080"
 
 // Event chargement liens dynamiques VODs
 window.addEventListener('load', () => {
@@ -33,12 +33,12 @@ function requete() {
             linkCreator(response, linkMpd)
         }
     })
-    xhr.open('GET', `http://localhost${port}/backend/get_content_list.php`)
+    xhr.open('GET', `http://${host}/backend/get_content_list.php`)
     xhr.send(null)
 }
 
 // Chargement du manifeste
-function loadManifest(mpd = `http://localhost${port}/BentoDash/test_1/stream.mpd`) {
+function loadManifest(mpd = `http://${host}/dash/test_1/stream.mpd`) {
     let video,
         player,
         url = mpd
@@ -61,7 +61,7 @@ function initApp() {
 }
 
 // Initialisation des paramètres du Player
-function initPlayer(mpd = `http://localhost${port}/BentoDash/test_1/stream.mpd`) {
+function initPlayer(mpd = `http://${host}/dash/test_1/stream.mpd`) {
     let prt = document.querySelector('.shakaPlayer-container')
     
     prt.innerHTML = ""    
