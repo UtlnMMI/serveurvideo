@@ -11,14 +11,14 @@ window.addEventListener('load', () => {
 // Création des liens des VODs
 const linkCreator = (resp, parent) => {
     resp.forEach(el => {
-        parent.insertAdjacentHTML('afterbegin', `<li><a href="${el.videoUrl}" class="has-text-primary">${el.videoId}</a></li>`)
+        parent.insertAdjacentHTML('afterbegin', `<li><a id="${el.videoId}" href="${el.videoUrl}" class="has-text-primary">${el.videoId}</a></li>`)
     })
     parent.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault()
             console.log(e.target.href)
             // ! Paramètre à changer par 'e.target.href' quand cms.data aura manifeste valide
-            initPlayer('https://storage.googleapis.com/shaka-demo-assets/angel-one/dash.mpd')
+            initPlayer(e.target.id, e.target.href)
         })
     })
 }
@@ -35,6 +35,13 @@ function requete() {
     })
     xhr.open('GET', `http://${host}/backend/get_content_list.php`)
     xhr.send(null)
+}
+
+// Push analytics
+function post_analytics(videoid) {
+    xhr = new XMLHttpRequest()
+    xhr.open('POST', `http://${host}/backend/analytics.php`)
+    xhr.send("content=" + videoid + "&action=play");
 }
 
 // Chargement du manifeste
@@ -61,7 +68,7 @@ function initApp() {
 }
 
 // Initialisation des paramètres du Player
-function initPlayer(mpd = `http://${host}/dash/test_1/stream.mpd`) {
+function initPlayer(vid =`video`, mpd = `http://${host}/dash/test_1/stream.mpd`) {
     let prt = document.querySelector('.shakaPlayer-container')
     
     prt.innerHTML = ""    
@@ -75,7 +82,9 @@ function initPlayer(mpd = `http://${host}/dash/test_1/stream.mpd`) {
     window.player = player
 
     player.addEventListener('error', onErrorEvent)
-
+    
+    post_analytics(vid)
+    
     player.load(mpd).then(function () {
         console.log('The video has now been loaded!')
     }).catch(onError)
