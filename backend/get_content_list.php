@@ -1,6 +1,6 @@
 <?php
 
-$keys = ["videoId", "videoUrl", "flag"];
+$keys = ["videoId", "videoUrl", "flag", "thumb", "desc"];
 $lines = file('cms.data');
 $jsonArr = null;
 for ($i = 0; $i < count($lines); $i++) {
