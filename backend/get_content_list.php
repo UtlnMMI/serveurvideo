@@ -7,13 +7,15 @@
 
   while(! feof($fn) )  {
 
-        $videoID = strtok($result,',');
+    $videoID = strtok($result,',');
 	$videoUrl = strtok(',');
 	$flag = strtok(',');
-        if( $debut != 1 && $flag == 1)
+    $thumb = strtok(',');
+	$desc = strtok(',');    
+    if( $debut != 1 && $flag == 1)
 		printf(",");
 	if( $flag == 1 )
-		printf(" { \"videoId\": \"%s\", \"videoUrl\": \"%s\" }", $videoID, $videoUrl);
+		printf(" { \"videoId\": \"%s\", \"videoUrl\": \"%s\", \"thumb\": \"%s\", \"desc\": \"%s\"}", $videoID, $videoUrl, $thumb, $desc);
 
 	$debut = 0;
 	$result = fgets($fn);
