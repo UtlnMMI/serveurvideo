@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>LP WebTV</title>
+    
+    <link rel="icon" type="image/png" href="utln-signet.png" />
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/fonts.css">
+
+  </head>
+  <body class="regular">
+
+
+<div style="background-color: #f7f7f7; padding-top:20px; padding-bottom: 30px;">
+<div class="container">
+ 
+ <div class="row">
+	 <div class="col-sm-7 phone-center">
+		<h2>La WebTV de l'université de Toulon</h2>
+	 </div>
+	 <div class="col-sm-5 ">
+			<img src="img/logo_univ.png" class="img-responsive center">
+	</div>
+ </div>
+ 
+</div>   
+</div>
+
+   <div style="padding: 40px 0px 20px 0px;">
+    <div class="container" >
+      <div class="row">
+        <div class="col-sm-6" style="padding-bottom: 20px;">
+		
+        <div class="col-sm-6">
+        	<canvas id="graph"  />
+        </div>
+
+      </div>
+    </div>
+</div>
+
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script>
+	var ctx = document.getElementById('graph').getContext('2d');
+	var chart = new Chart(ctx, {
+		// The type of chart we want to create
+		type: 'bar',
+
+		// The data for our dataset
+		data: {
+			labels: ['Video1', 'Video2', 'Video3', 'Video4', 'Video5'],
+			datasets: [{
+				label: 'Best rated videos',
+				backgroundColor: 'rgb(255, 99, 132)',
+				borderColor: 'rgb(255, 99, 132)',
+				data: [0, 10, 5, 2, 20, 30, 45]
+			}]
+		},
+
+		// Configuration options go here
+		options: {}
+	});
+    </script>
+  </body>
+</html>
