@@ -4,7 +4,7 @@
 function addLog($event) {
     $file = fopen("data.log", "a+") or print_r(error_get_last());
     $ua1=getBrowser();
-    $txt = "{$_POST['content']},{$_POST['action']},$ua1,\n";
+    $txt = "{$_POST['content']},{$_POST['action']},{$ua1},\n";
     fwrite($file, $txt);
     fclose($file);
 
