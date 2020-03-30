@@ -52,15 +52,13 @@
 	xhr.addEventListener('readystatechange', function () {
 		if (xhr.readyState === XMLHttpRequest.DONE && xhr.readyState === 4) {
 			rep = JSON.parse(xhr.responseText);
-			console.log(rep[0]);
-			console.log(rep[0].label[3]);
-			console.log(rep[0].data[1]);
+			creerChart();
 		}
 	});
 	xhr.open('GET', 'http://localhost:8080/analytics/data_video.txt');
 	xhr.send();
 
-	console.log(rep[0]);	
+	function creerChart() {
 	var ctx = document.getElementById('graph').getContext('2d');
 	var chart = new Chart(ctx, {
 		// The type of chart we want to create
@@ -68,18 +66,19 @@
 		
 		// The data for our dataset
 		data: {
-			labels: [rep[0].label[0], rep[0].label[1], rep[0].label[2], rep[0].label[3], rep[0].label[4]],
+			labels: rep[0].label,
 			datasets: [{
 				label: 'Best rated videos',
 				backgroundColor: 'rgb(255, 99, 132)',
 				borderColor: 'rgb(255, 99, 132)',
-				data: [rep[0].data[0], rep[0].data[1], rep[0].data[2], rep[0].data[3], rep[0].data[4]]
+				data: rep[0].data,
 			}]
 		},
 
 		// Configuration options go here
 		options: {}
 	});
+	}
     </script>
   </body>
 </html>
