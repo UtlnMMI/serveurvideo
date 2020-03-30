@@ -9,9 +9,9 @@
     
     <link rel="icon" type="image/png" href="utln-signet.png" />
 
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/fonts.css">
+    <!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
+    <!-- <link rel="stylesheet" href="css/main.css"> -->
+    <!-- <link rel="stylesheet" href="css/fonts.css">-->
 
   </head>
   <body class="regular">
@@ -22,10 +22,10 @@
  
  <div class="row">
 	 <div class="col-sm-7 phone-center">
-		<h2>La WebTV de l'université de Toulon</h2>
+		<h2 style="text-align:center;font-family: helvetica;">La WebTV de l'université de Toulon</h2>
 	 </div>
 	 <div class="col-sm-5 ">
-			<img src="img/logo_univ.png" class="img-responsive center">
+			<img src="../../public/webtv/img/logo_univ.png" class="img-responsive center">
 	</div>
  </div>
  
@@ -47,25 +47,38 @@
 
 	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <script>
+	var rep = [];
+	xhr = new XMLHttpRequest();
+	xhr.addEventListener('readystatechange', function () {
+		if (xhr.readyState === XMLHttpRequest.DONE && xhr.readyState === 4) {
+			rep = JSON.parse(xhr.responseText);
+			creerChart();
+		}
+	});
+	xhr.open('GET', 'http://localhost:8080/backend/get_stats.php');
+	xhr.send();
+
+	function creerChart() {
 	var ctx = document.getElementById('graph').getContext('2d');
 	var chart = new Chart(ctx, {
 		// The type of chart we want to create
 		type: 'bar',
-
+		
 		// The data for our dataset
 		data: {
-			labels: ['Video1', 'Video2', 'Video3', 'Video4', 'Video5'],
+			labels: rep[0].label,
 			datasets: [{
 				label: 'Best rated videos',
 				backgroundColor: 'rgb(255, 99, 132)',
 				borderColor: 'rgb(255, 99, 132)',
-				data: [0, 10, 5, 2, 20, 30, 45]
+				data: rep[0].data,
 			}]
 		},
 
 		// Configuration options go here
 		options: {}
 	});
+	}
     </script>
   </body>
 </html>
