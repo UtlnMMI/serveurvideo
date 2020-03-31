@@ -1,9 +1,11 @@
 Serveur Video MMI 2 2020
-<<<<<<< HEAD
-wola
 =======
 
+Création d'un serveur video permettant de jouer un flux live et plusieurs vidéos enregistrées depuis un site Web.
+Ce projet comprend un outil de packaging VOD et un service de packaging Live
+- VoD: [Shaka packager](https://github.com/google/shaka-packager)
+- Live: [Wowza Streaming Engine](https://www.wowza.com/products/streaming-engine)
 
-# Commentaire ajouté par Hippolyte SOULIER
+Une interface CMS (Content Management System) qui permet de référencer les vidéos traités
 
->>>>>>> be6f774636c6c97bd986bd29d26f1c9a7d720ba2
+Ainsi qu'un outil d'Analytics permettant de faire du reporting sur les vidéos consommées.
