@@ -41,6 +41,11 @@ function requete() {
 function post_analytics(videoid) {
     xhr = new XMLHttpRequest()
     xhr.open('POST', `http://${host}/backend/analytics.php`)
+    xhr.onreadystatechange = function() {
+    if(xhr.readyState == 4 && xhr.status == 200) {
+        alert(xhr.responseText);
+    }
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xhr.send("content=" + videoid + "&action=play");
 }
 
